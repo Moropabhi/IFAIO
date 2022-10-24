@@ -1,5 +1,5 @@
 #pragma once
-#include "Window.h"
+#include "Core/window/Window.h"
 #include "Utilities/WizardTimer.h"
 #include "Utilities/WizardException.h"
 
@@ -17,18 +17,23 @@ public:
 	//App(AppSpecification& spec);
 	App();
 	//~App();
-
-	virtual void onSetup();
-	virtual void onRender(float delta);
-	virtual void onInput();
+	App(const App& app) = delete;
+	App&  operator=(const App& app) = delete;
+	virtual void onSetup(){}
+	virtual void onRender(float delta){}
+	virtual void onInput(){}
 	int run();
+public:
+	Window m_RootWindow;
 private:
 	void setup();
+	void input();
 	void render();
+	void pollEvents();
 
 private:
-	Window m_RootWindow;
 	WizardTimer timer;
-	MSG msg;
+	bool m_shouldQuit = false;
+	int m_ErrorCode = 0;
 };
 

@@ -6,11 +6,32 @@ void App::setup()
 	return onSetup();
 }
 
+void App::input()
+{
+	onInput();
+}
+
 void App::render()
 {
-	TranslateMessage(&msg);
-	DispatchMessage(&msg);
 	return onRender(timer.mark());
+}
+
+void App::pollEvents()
+{
+	bool isEmpty = 0;
+	m_RootWindow.processMessages(isEmpty);
+	while (isEmpty)
+	{
+		input();
+		auto res = m_RootWindow.processMessages(isEmpty);
+		if (res.has_value())
+		{
+			m_ErrorCode = res.value();
+			m_shouldQuit = true;
+			return;
+		}
+			
+	}
 }
 
 App::App()
@@ -19,32 +40,16 @@ App::App()
 
 }
 
-void App::onSetup()
-{
-}
-
-void App::onRender(float delta)
-{
-	std::wstring w = L"FrameRate: ";
-	w += std::to_wstring(delta);
-
-	m_RootWindow.setName(w.c_str());
-}
-
-void App::onInput()
-{
-}
-
 int App::run()
 {
 	try {
 		setup();
-
-		while (GetMessageW(&msg, NULL, 0, 0))
+		while (!m_shouldQuit)
 		{
 			render();
+			pollEvents();
 		}
-		return 0;
+		return m_ErrorCode;
 	}
 	catch (const WizardException& e)
 	{
@@ -60,4 +65,4 @@ int App::run()
 	}
 	return -1;
 }
-#include "Wizardwin32.h"
+

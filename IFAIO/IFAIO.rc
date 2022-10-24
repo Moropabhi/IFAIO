@@ -50,9 +50,7 @@ END
 // PNG
 //
 
-IDB_PNG1                PNG                     "res\\info_face.png"
-
-IDB_PNG2                PNG                     "res\\info_face2.png"
+IDB_PNG1                PNG                     "res\\info_face2.png"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -62,11 +60,7 @@ IDB_PNG2                PNG                     "res\\info_face2.png"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "res\\info_face.ico"
-
-IDI_ICON2               ICON                    "F:\\Abhisek\\Abhisek C++\\projects\\IFAIO\\IFAIO\\res\\info_face2.ico"
-
-IDI_ICON3               ICON                    "res\\info_face2.ico"
+IDI_ICON1               ICON                    "res\\info_face2.ico"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

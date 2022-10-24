@@ -1,9 +1,11 @@
 #pragma once
 #include "WizardWindowsAPI.h"
-#include "Utilities.h"
+#include "Utilities/Utilities.h"
 #include "Utilities/WizardException.h"
-#include "Keyboard.h"
-#include "Mouse.h"
+#include "Core/Input/Keyboard.h"
+#include "Core/Input/Mouse.h"
+
+#include <optional>
 
 
 struct WindowProperties
@@ -22,6 +24,7 @@ public:
 
 
 	void setName(const Char* c);
+	std::optional<int> processMessages(bool& isQueueEmpty);
 
 public:
 	Keyboard m_Keyboard;

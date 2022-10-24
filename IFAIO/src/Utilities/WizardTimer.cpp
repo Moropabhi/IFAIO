@@ -25,7 +25,7 @@ float WizardTimer::mark()
 	auto now = std::chrono::high_resolution_clock::now();
 	auto time = now - m_Last;
 	m_Last = now;
-	return 1/(time.count() * 1e-9);
+	return time.count() * 1e-9;
 
 }
 

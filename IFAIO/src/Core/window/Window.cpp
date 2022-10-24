@@ -1,4 +1,6 @@
 #include "Window.h"
+
+#include "Wizardwin32.h"
 #include "../resource.h"
 
 Window::WindowClass  Window::WindowClass:: s_WindowClass;
@@ -42,6 +44,21 @@ Window::~Window()
 void Window::setName(const Char* c)
 {
 	SetWindowText(m_Handler, c);
+}
+
+std::optional<int> Window::processMessages(bool& isQueueEmpty)
+{
+	MSG msg;
+	isQueueEmpty=PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE);
+	
+	if (msg.message == WM_QUIT)
+	{
+		return (int)msg.wParam;
+	}
+	
+	TranslateMessage(&msg);
+	DispatchMessage(&msg);
+	return {};
 }
 
 LRESULT CALLBACK Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
