@@ -1,78 +1,88 @@
 #pragma once
-
-#pragma once
+#include "core/window/WizardWindowsAPI.h"
+#include "EventType.h"
 #include <queue>
 #include <bitset>
 
-class Keyboard
+namespace IFAIO
 {
-	friend class Window;
-public:
-	struct Event
+
+	class Keyboard
 	{
+		friend class Window;
 	public:
-		enum class Type
+		struct Event
 		{
-			Invalid = -1,
-			Release,
-			Press,
+		public:
+			enum class Type
+			{
+				Invalid = -1,
+				Release,
+				Press,
+			};
+		public:
+			Event() = default;
+			Event(Type type, unsigned char code) noexcept
+				:m_Type(type), m_Code(code)
+			{}
+			bool IsPress() const noexcept
+			{
+				return bool(m_Type);
+			}
+			bool IsRelease() const noexcept
+			{
+				return !(bool)m_Type;
+			}
+			bool IsValid() const noexcept
+			{
+				return m_Type != Type::Invalid;
+			}
+			unsigned char GetCode() const noexcept
+			{
+				return m_Code;
+			}
+		private:
+			Type m_Type = Type::Invalid;
+			unsigned char m_Code = 0u;
 		};
 	public:
-		Event() = default;
-		Event(Type type, unsigned char code) noexcept
-			:m_Type(type),m_Code(code)
-		{}
-		bool IsPress() const noexcept
-		{
-			return bool(m_Type);
-		}
-		bool IsRelease() const noexcept
-		{
-			return !(bool)m_Type;
-		}
-		bool IsValid() const noexcept
-		{
-			return m_Type != Type::Invalid;
-		}
-		unsigned char GetCode() const noexcept
-		{
-			return m_Code;
-		}
+		Keyboard() = default;
+		Keyboard(const Keyboard&) = delete;
+		Keyboard& operator=(const Keyboard&) = delete;
+		// key event stuff
+		bool isKeyPressed(unsigned char keycode) const noexcept;
+		Event readKey() noexcept;
+		bool isKeyEmpty() const noexcept;
+		void flushKey() noexcept;
+		// char event stuff
+		char readChar() noexcept;
+		char getChar() noexcept { return m_CurrentCharacter; }
+		size_t noOfChar() const noexcept  { return m_Charbuffer.size(); }
+		bool isCharEmpty() const noexcept;
+		void flushChar() noexcept;
+		void flush() noexcept;
+		// autorepeat control
+		void enableAutorepeat() noexcept;
+		void disableAutorepeat() noexcept;
+		bool isAutorepeatEnabled() const noexcept;
 	private:
-		Type m_Type=Type::Invalid;
-		unsigned char m_Code=0u;
-	};
-public:
-	Keyboard() = default;
-	Keyboard(const Keyboard&) = delete;
-	Keyboard& operator=(const Keyboard&) = delete;
-	// key event stuff
-	bool isKeyPressed(unsigned char keycode) const noexcept;
-	Event readKey() noexcept;
-	bool isKeyEmpty() const noexcept;
-	void flushKey() noexcept;
-	// char event stuff
-	char readChar() noexcept;
-	bool isCharEmpty() const noexcept;
-	void flushChar() noexcept;
-	void flush() noexcept;
-	// autorepeat control
-	void enableAutorepeat() noexcept;
-	void disableAutorepeat() noexcept;
-	bool isAutorepeatEnabled() const noexcept;
-private:
-	void onKeyPressed(unsigned char keycode) noexcept;
-	void onKeyReleased(unsigned char keycode) noexcept;
-	void onChar(char character) noexcept;
-	void clearState() noexcept;
-	template<typename T>
-	static void trimBuffer(std::queue<T>& buffer) noexcept;
-private:
-	static constexpr unsigned int s_NoKeys = 256u;
-	static constexpr unsigned int s_BufferSize = 16u;
-	bool m_AutorepeatEnabled = false;
-	std::bitset<s_NoKeys> m_Keystates;
-	std::queue<Event> m_Keybuffer;
-	std::queue<char> m_Charbuffer;
-};
+		void onKeyPressed(unsigned char keycode) noexcept;
+		void onKeyReleased(unsigned char keycode) noexcept;
+		void onChar(char character) noexcept;
+		void clearState() noexcept;
+		template<typename T>
+		static void trimBuffer(std::queue<T>& buffer) noexcept;
 
+		void getAnyEvent(UINT msg, WPARAM wParam, LPARAM lParam, EventType& e);
+
+	private:
+		static constexpr unsigned int s_NoKeys = 256u;
+		static constexpr unsigned int s_BufferSize = 16u;
+		bool m_AutorepeatEnabled = false;
+		mutable volatile char m_CurrentCharacter = 0;
+		std::bitset<s_NoKeys> m_Keystates;
+		std::queue<Event> m_Keybuffer;
+		std::queue<char> m_Charbuffer;
+	};
+
+}
