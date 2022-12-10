@@ -29,16 +29,16 @@ namespace IFAIO
 
 		// mouse input handling //
 
-			/*static bool isMouseOnRect2D(Rect2D box);
-			static Vector2 getMousePos();
-			static Vector2 getMousePosinRespectToRect2D(Rect2D box);
+		static bool isMouseOnRect2D						(const App*, Rect box);
+		static Vec2 getMousePos							(const App*);
+		static Vec2 getMousePosinRespectToVec2			(const App*, Vec2 vec);
 
-			static bool isMouseButtonPressed(uint8_t button);
-			static bool isMouseButtonPressedOnRect2D(Rect2D box, uint8_t button);
-			static bool isMouseButtonJustPressedOnRect2D(Rect2D box, uint8_t button);
+		static bool isMouseButtonPressed				(const App*,uint8_t button);
+		static bool isMouseButtonPressedOnRect2D		(const App*,Rect box, uint8_t button);
+		static bool isMouseButtonJustPressedOnRect2D	(const App*,Rect box, uint8_t button);
 
-			static bool isMouseButtonReleased(uint8_t button);
-			static bool isMouseButtonReleasedOnRect2D(Rect2D box, uint8_t button);*/
+		static bool isMouseButtonReleased				(const App*,uint8_t button);
+		static bool isMouseButtonReleasedOnRect2D		(const App*,Rect box, uint8_t button);
 
 
 	};

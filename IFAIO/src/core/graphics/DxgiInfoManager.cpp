@@ -1,4 +1,5 @@
 #include "DxgiInfoManager.h"
+#include "core/window/Window.h"
 #include "Graphics.h"
 #include <memory>
 
@@ -28,15 +29,7 @@ namespace IFAIO {
 		}
 
 		HRESULT hr;
-		GFX_THROW_NOINFO(DxgiGetDebugInterface((REFIID)__uuidof(IDXGIInfoQueue), reinterpret_cast<void**>(&pDxgiInfoQueue)));
-	}
-
-	DxgiInfoManager::~DxgiInfoManager()
-	{
-		if (pDxgiInfoQueue != nullptr)
-		{
-			pDxgiInfoQueue->Release();
-		}
+		GFX_THROW_NOINFO(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), &pDxgiInfoQueue));
 	}
 
 	void DxgiInfoManager::Set() noexcept

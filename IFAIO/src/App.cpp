@@ -16,6 +16,7 @@ namespace IFAIO
 
 	void App::render()
 	{
+
 		onRender(timer.mark());
 
 		return m_RootWindow.getGraphics().EndFrame();
@@ -48,7 +49,8 @@ namespace IFAIO
 
 	int App::run()
 	{
-		try {
+		try
+		{
 			setup();
 			while (!m_shouldQuit)
 			{
@@ -57,7 +59,8 @@ namespace IFAIO
 			}
 			return m_ErrorCode;
 		}
-		catch (const WizardException& e)
+
+		catch (const IFAIO::WizardException& e)
 		{
 			MessageBox(nullptr, e.whatW(), e.GetTypeW(), MB_OK | MB_ICONEXCLAMATION);
 		}
@@ -70,6 +73,6 @@ namespace IFAIO
 			MessageBox(nullptr, L"No details available", L"Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
 		}
 		return -1;
-	}
 
+	}
 }

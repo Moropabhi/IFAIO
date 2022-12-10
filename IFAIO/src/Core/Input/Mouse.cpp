@@ -6,9 +6,9 @@
 namespace IFAIO
 {
 
-	std::pair<int, int> Mouse::getPos() const noexcept
+	Vec2 Mouse::getPos() const noexcept
 	{
-		return { m_X,m_Y };
+		return Vec2{ m_X,m_Y };
 	}
 
 	int Mouse::getPosX() const noexcept

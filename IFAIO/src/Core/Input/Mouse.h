@@ -3,6 +3,7 @@
 #include "core/window/WizardWindowsAPI.h"
 #include "EventType.h"
 #include <queue>
+#include "core/dataStructs/Utilities.h"
 
 namespace IFAIO
 {
@@ -51,7 +52,7 @@ namespace IFAIO
 			{
 				return type;
 			}
-			std::pair<int, int> GetPos() const noexcept
+			Vec2 GetPos() const noexcept
 			{
 
 				return{ m_X,m_Y };
@@ -77,7 +78,7 @@ namespace IFAIO
 		Mouse() = default;
 		Mouse(const Mouse&) = delete;
 		Mouse& operator=(const Mouse&) = delete;
-		std::pair<int, int> getPos() const noexcept;
+		Vec2 getPos() const noexcept;
 		int getPosX() const noexcept;
 		int getPosY() const noexcept;
 		bool isInWindow() const noexcept;

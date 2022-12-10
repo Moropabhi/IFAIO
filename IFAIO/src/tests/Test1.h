@@ -1,8 +1,10 @@
-﻿#include "App.h"
+#pragma once
+
+#include "App.h"
 
 class WizardsApp :public IFAIO::App
 {
-	float r=1, g=1, b=1;
+	float r = 1, g = 1, b = 1;
 	int mul = 1;
 	unsigned int inputs = 0;
 
@@ -13,7 +15,7 @@ class WizardsApp :public IFAIO::App
 
 	void onRender(float delta) override
 	{
-		m_RootWindow.getGraphics().DrawTestTriangle();
+		m_RootWindow.getGraphics().ClearBuffer(r, g, b);
 	}
 
 	void onInput(IFAIO::EventType e) override
@@ -22,7 +24,7 @@ class WizardsApp :public IFAIO::App
 
 		static std::wstring w = L"Text: ";
 
-		
+
 		switch (e)
 		{
 		case MOUSE_LEFT_BUTTON_PRESSED:
@@ -34,13 +36,6 @@ class WizardsApp :public IFAIO::App
 			w += InputSystem::getTextW(this);
 			m_RootWindow.setName(w);
 		}
-		
+
 	}
 };
-
-int main()
-{
-	WizardsApp application;
-	return application.run();
-}
-

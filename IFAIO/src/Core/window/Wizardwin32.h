@@ -1,4 +1,6 @@
 #include "Window.h"
+#include "core/utilities/WizardException.h"
+
 
 int main();
 
@@ -8,5 +10,5 @@ int CALLBACK WinMain(
 	LPSTR   	lpCmdLine,
 	int			nCmdShow)
 {
-	return main();
+	
 }

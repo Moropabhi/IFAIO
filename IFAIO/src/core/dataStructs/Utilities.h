@@ -7,6 +7,10 @@
 #include <vector>
 #include <unordered_map>
 
+#include <cmath>
+#include <iostream>
+#include <fstream>
+
 namespace IFAIO
 {
 
@@ -44,15 +48,8 @@ namespace IFAIO
 #endif
 
 
-	struct Vec2
-	{
-		int x, y;
-	};
-
-	struct Rect
-	{
-		Vec2 start, end;
-	};
+#include "core/math/Vec2.h"
+#include "core/math/Rect.h"
 
 	class Utilities
 	{

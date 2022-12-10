@@ -1,10 +1,10 @@
 #pragma once
 #include "WizardWindowsAPI.h"
+#include "Core/graphics/Graphics.h"
 #include "core/dataStructs/Utilities.h"
 #include "core/Utilities/WizardException.h"
 #include "Core/Input/Keyboard.h"
 #include "Core/Input/Mouse.h"
-#include "Core/graphics/Graphics.h"
 
 #include <optional>
 
@@ -83,3 +83,4 @@ namespace IFAIO
 
 #define WND_EXCEPT( hr ) Window::Exception( __LINE__,__FILE__,hr )
 #define WND_LAST_EXCEPT() Window::Exception( __LINE__,__FILE__,GetLastError() )
+

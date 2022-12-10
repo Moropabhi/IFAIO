@@ -1,13 +1,11 @@
 #pragma once
 
-#include "core/window/Window.h"
+#include "core/window/WizardWindowsAPI.h"
 #include "Core/utilities/WizardException.h"
 #include "Core/dataStructs/Utilities.h"
 #include <d3d11.h>
 #include "DxgiInfoManager.h"
 #include "dxErr.h"
-
-#define DX3D_Deleter(x)  if (x != nullptr) x->Release()
 
 namespace IFAIO
 {
@@ -33,6 +31,16 @@ namespace IFAIO
 			HRESULT hr;
 			std::string info;
 		};
+		class InfoException : public Exception
+		{
+		public:
+			InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept;
+			const char* what() const noexcept override;
+			const char* GetType() const noexcept override;
+			std::string GetErrorInfo() const noexcept;
+		private:
+			std::string info;
+		};
 		class DeviceRemovedException : public HrException
 		{
 			using HrException::HrException;
@@ -48,13 +56,14 @@ namespace IFAIO
 		~Graphics();
 		void EndFrame();
 		void ClearBuffer(float red, float green, float blue) noexcept;
+		void DrawTestTriangle();
 	private:
 #ifndef NDEBUG
 		DxgiInfoManager infoManager;
 #endif
-		ID3D11Device* p_Device = nullptr;
-		IDXGISwapChain* p_Swap = nullptr;
-		ID3D11DeviceContext* p_Context = nullptr;
-		ID3D11RenderTargetView* p_Target = nullptr;
+		Microsoft::WRL::ComPtr<ID3D11Device> p_Device;
+		Microsoft::WRL::ComPtr<IDXGISwapChain> p_Swap;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> p_Context;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> p_Target;
 	};
 }
