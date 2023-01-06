@@ -2,7 +2,7 @@
 #include "core/window/Window.h"
 #include "core/Input/InputSystem.h"
 #include "core/Utilities/WizardTimer.h"
-#include "core/Utilities/WizardException.h"
+#include "core/debug/WizardException.h"
 
 namespace IFAIO
 {

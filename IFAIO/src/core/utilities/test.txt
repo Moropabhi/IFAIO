@@ -1,0 +1,8 @@
+func vertex ( pos : float4 , colour: float3 )
+{
+	VSOut vso;
+	vso.pos = [pos.x, pos.y, 0.0f, 1.0f];
+	vso.colour = colour;
+	vso.uv = colour.xy;
+	return vso;
+}

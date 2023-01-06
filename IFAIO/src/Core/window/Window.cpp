@@ -1,7 +1,9 @@
 #include "Window.h"
+#include "core/debug/WizardException.h"
 
 #include "Wizardwin32.h"
 #include "../resource.h"
+
 
 namespace IFAIO
 {
@@ -158,31 +160,27 @@ namespace IFAIO
 	}
 
 	Window::Exception::Exception(int line, const char* file, HRESULT hr) noexcept
-		:WizardException(line, file), hr(hr)
+		:WizardException::WizardException(line, file), hr(hr)
 	{
 	}
 
 	const char* Window::Exception::what() const noexcept
 	{
 		std::ostringstream oss;
-		oss << GetType() << std::endl
-			<< "[Error Code] " << GetErrorCode() << std::endl
-			<< "[Description] " << GetErrorString() << std::endl
-			<< GetOriginString();
+		oss << getType() << std::endl
+			<< "[Error Code] " << getErrorCode() << std::endl
+			<< "[Description] " << getErrorString() << std::endl
+			<< getOriginString();
 		whatBuffer = oss.str();
 		return whatBuffer.c_str();
 	}
 
-	const char* Window::Exception::GetType() const noexcept
+	const char* Window::Exception::getType() const noexcept
 	{
 		return "WizardWindowException";
 	}
-	const wchar_t* Window::Exception::GetTypeW() const noexcept
-	{
-		return L"WizardWindowException";
-	}
 
-	std::string Window::Exception::TranslateErrorCode(HRESULT hr) noexcept
+	std::string Window::Exception::translateErrorCode(HRESULT hr) noexcept
 	{
 		char* pMsgBuf = nullptr;
 		// windows will allocate memory for err string and make our pointer point to it
@@ -204,14 +202,14 @@ namespace IFAIO
 		return errorString;
 	}
 
-	HRESULT Window::Exception::GetErrorCode() const noexcept
+	HRESULT Window::Exception::getErrorCode() const noexcept
 	{
 		return hr;
 	}
 
-	std::string Window::Exception::GetErrorString() const noexcept
+	std::string Window::Exception::getErrorString() const noexcept
 	{
-		return TranslateErrorCode(hr);
+		return translateErrorCode(hr);
 	}
 
 }

@@ -1,4 +1,5 @@
 #include "App.h"
+#include "core/mesh/MeshSystem.h"
 
 namespace IFAIO
 {
@@ -6,7 +7,9 @@ namespace IFAIO
 	void App::setup()
 	{
 		timer.start();
-		return onSetup();
+		onSetup();
+		//auto& gfx = m_RootWindow.getGraphics();
+		//MeshSystem::Create(gfx.getDevice());
 	}
 
 	void App::input(EventType e)
@@ -16,9 +19,9 @@ namespace IFAIO
 
 	void App::render()
 	{
-
 		onRender(timer.mark());
-
+		//auto& gfx = m_RootWindow.getGraphics();
+		//MeshSystem::Draw(gfx.getDevice(), gfx.getContext(), gfx.getTarget());
 		return m_RootWindow.getGraphics().EndFrame();
 	}
 
@@ -42,7 +45,7 @@ namespace IFAIO
 	}
 
 	App::App()
-		:m_RootWindow(500, 500, L"WizardWindow")
+		:m_RootWindow(800, 600, L"WizardWindow")
 	{
 
 	}
@@ -62,10 +65,12 @@ namespace IFAIO
 
 		catch (const IFAIO::WizardException& e)
 		{
-			MessageBox(nullptr, e.whatW(), e.GetTypeW(), MB_OK | MB_ICONEXCLAMATION);
+			LOG(e.what())
+			MessageBoxA(nullptr, e.what(), e.getType(), MB_OK | MB_ICONEXCLAMATION);
 		}
 		catch (const std::exception& e)
 		{
+			LOG(e.what())
 			MessageBoxA(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
 		}
 		catch (...)

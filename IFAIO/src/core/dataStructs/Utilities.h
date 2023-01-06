@@ -11,8 +11,16 @@
 #include <iostream>
 #include <fstream>
 
+#include <wrl.h>
+#include <d3d11.h>
+
+
+#include "core/math/Vec2.h"
+#include "core/math/Rect.h"
+
 namespace IFAIO
 {
+	namespace wrl = Microsoft::WRL;
 
 	typedef  double Decimal;
 
@@ -48,8 +56,6 @@ namespace IFAIO
 #endif
 
 
-#include "core/math/Vec2.h"
-#include "core/math/Rect.h"
 
 	class Utilities
 	{

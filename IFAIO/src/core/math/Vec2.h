@@ -14,14 +14,14 @@ public:
 	static const Vec2 DOWN;
 
 	Vec2()
-		:x(0), y(0)
+		:x(0.0f), y(0.0f)
 	{
 	}
-	Vec2(double x)
+	Vec2(float x)
 		: Vec2(x, x)
 	{
 	}
-	Vec2(double X, double Y)
+	Vec2(float X, float Y)
 		: x(X), y(Y)
 	{
 	}
@@ -30,11 +30,11 @@ public:
 	{
 	}
 
-	double lengthSquared() const
+	float lengthSquared() const
 	{
 		return x * x + y * y;
 	}
-	double length() const
+	float length() const
 	{
 		return sqrt(lengthSquared());
 	}
@@ -115,17 +115,17 @@ public:
 		return x >= v.x && y >= v.y;
 	}
 	
-	double x, y;
+	float x, y;
 };
 
 inline std::ostream& operator<<(std::ostream& out, const Vec2& v)
 {
 	return out << "Vec2 ( " << v[0] << " , " << v[1] << " )";
 }
-Vec2 operator+(const Vec2& v, double c);
-Vec2 operator-(const Vec2& v, double c);
-Vec2 operator*(const Vec2& v, double c);
-Vec2 operator/(const Vec2& v, double c);
+Vec2 operator+(const Vec2& v, float c);
+Vec2 operator-(const Vec2& v, float c);
+Vec2 operator*(const Vec2& v, float c);
+Vec2 operator/(const Vec2& v, float c);
 Vec2 operator+(const Vec2& v1, const Vec2& v2);
 Vec2 operator-(const Vec2& v1, const Vec2& v2);
 Vec2 operator*(const Vec2& v1, const Vec2& v2);

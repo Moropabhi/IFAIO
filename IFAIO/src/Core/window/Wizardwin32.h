@@ -1,5 +1,5 @@
 #include "Window.h"
-#include "core/utilities/WizardException.h"
+#include "core/debug/WizardException.h"
 
 
 int main();

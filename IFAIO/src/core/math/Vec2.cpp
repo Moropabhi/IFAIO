@@ -12,19 +12,19 @@ const Vec2 Vec2::DOWN = { 0,1 };
 
 
 
-Vec2 operator+(const Vec2& v, double c)
+Vec2 operator+(const Vec2& v, float c)
 {
     return Vec2(v.x + c, v.y + c);
 }
-Vec2 operator-(const Vec2& v, double c)
+Vec2 operator-(const Vec2& v, float c)
 {
     return Vec2(v.x - c, v.y - c);
 }
-Vec2 operator*(const Vec2& v, double c)
+Vec2 operator*(const Vec2& v, float c)
 {
     return Vec2(v.x * c, v.y * c);
 }
-Vec2 operator/(const Vec2& v, double c)
+Vec2 operator/(const Vec2& v, float c)
 {
     return Vec2(v.x / c, v.y / c);
 }

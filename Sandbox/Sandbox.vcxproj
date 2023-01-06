@@ -101,6 +101,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>
+      </ShaderType>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -124,6 +129,9 @@
       <ObjectFileOutput>$(ProjectDir)(Filename).cso</ObjectFileOutput>
       <EnableDebuggingInformation>true</EnableDebuggingInformation>
       <AllResourcesBound>true</AllResourcesBound>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>
+      </ShaderType>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -140,6 +148,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>
+      </ShaderType>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -163,6 +176,9 @@
       <ObjectFileOutput>$(ProjectDir)(Filename).cso</ObjectFileOutput>
       <EnableDebuggingInformation>true</EnableDebuggingInformation>
       <AllResourcesBound>true</AllResourcesBound>
+      <ShaderModel>5.0</ShaderModel>
+      <ShaderType>
+      </ShaderType>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -172,6 +188,12 @@
     <ProjectReference Include="..\IFAIO\IFAIO.vcxproj">
       <Project>{1d58298b-3d46-4b35-b6ef-44d5ea4037b7}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\PixelShader.hlsl" />
+    <_EmbedManagedResourceFile Include="shaders\VertexShader.hlsl">
+      <FileType>Document</FileType>
+    </_EmbedManagedResourceFile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

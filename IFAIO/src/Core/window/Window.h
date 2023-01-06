@@ -1,8 +1,7 @@
 #pragma once
 #include "WizardWindowsAPI.h"
-#include "Core/graphics/Graphics.h"
 #include "core/dataStructs/Utilities.h"
-#include "core/Utilities/WizardException.h"
+#include "Core/graphics/Graphics.h"
 #include "Core/Input/Keyboard.h"
 #include "Core/Input/Mouse.h"
 
@@ -28,8 +27,10 @@ namespace IFAIO
 
 		void setName(const std::wstring c);
 		std::optional<int> processMessages(bool& isQueueEmpty, EventType& e);
-		Graphics& getGraphics() { return *p_Graphics; }
 
+		Graphics& getGraphics() { return *p_Graphics; }
+		float getWidth() { return m_Width; }
+		float getHeight() { return m_Height; }
 	public:
 		Keyboard m_Keyboard;
 		Mouse m_Mouse;
@@ -70,11 +71,10 @@ namespace IFAIO
 	public:
 		Exception(int line, const char* file, HRESULT hr) noexcept;
 		const char* what() const noexcept override;
-		virtual const char* GetType() const noexcept;
-		virtual const wchar_t* GetTypeW() const noexcept;
-		static std::string TranslateErrorCode(HRESULT hr) noexcept;
-		HRESULT GetErrorCode() const noexcept;
-		std::string GetErrorString() const noexcept;
+		virtual const char* getType() const noexcept override;
+		static std::string translateErrorCode(HRESULT hr) noexcept ;
+		HRESULT getErrorCode() const noexcept override;
+		std::string getErrorString() const noexcept override;
 	private:
 		HRESULT hr;
 	};

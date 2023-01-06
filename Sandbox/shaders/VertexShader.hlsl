@@ -4,12 +4,16 @@ struct VSOut
 	float2 uv : UV;
 	float4 pos : SV_Position;
 };
+cbuffer CBuf
+{
+	matrix transform;
+	float Time;
+};
 
-
-VSOut main( float4 pos : Position, float3 colour: Colour )
+VSOut main( float3 pos : Position, float3 colour: Colour )
 {
 	VSOut vso;
-	vso.pos = float4(pos.x, pos.y, 0.0f, 1.0f);
+	vso.pos = mul(float4(pos, 1.0f),transform);
 	vso.colour = colour;
 	vso.uv = colour.xy;
 	return vso;
