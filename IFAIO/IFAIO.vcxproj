@@ -201,7 +201,7 @@
     <ClCompile Include="src\Core\Input\Keyboard.cpp" />
     <ClCompile Include="src\core\math\Vec2.cpp" />
     <ClCompile Include="src\core\mesh\IndexBuffer.cpp" />
-    <ClCompile Include="src\core\mesh\Vertex2D.cpp" />
+    <ClCompile Include="src\core\mesh\Shader.cpp" />
     <ClCompile Include="src\core\mesh\VertexBuffer.cpp" />
     <ClCompile Include="src\core\utilities\WizardTimer.cpp" />
     <ClCompile Include="src\core\debug\WizardException.cpp" />
@@ -212,6 +212,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\App.h" />
     <ClInclude Include="src\core\dataStructs\Storage.h" />
+    <ClInclude Include="src\core\graphics\Drawable.h" />
     <ClInclude Include="src\core\math\Rect.h" />
     <ClInclude Include="src\Core\DataStructs\Utilities.h" />
     <ClInclude Include="src\core\debug\dxErr.h" />
@@ -222,20 +223,26 @@
     <ClInclude Include="src\Core\Input\Mouse.h" />
     <ClInclude Include="src\Core\Input\Keyboard.h" />
     <ClInclude Include="src\core\math\Vec2.h" />
+    <ClInclude Include="src\core\nodes\Box.h" />
+    <ClInclude Include="src\core\mesh\ConstantBuffer.h" />
     <ClInclude Include="src\core\mesh\IndexBuffer.h" />
     <ClInclude Include="src\core\mesh\Shader.h" />
     <ClInclude Include="src\core\mesh\MeshSystem.h" />
-    <ClInclude Include="src\core\mesh\Vertex.h" />
     <ClInclude Include="src\core\mesh\Vertex2D.h" />
+    <ClInclude Include="src\core\mesh\Vertex3D.h" />
     <ClInclude Include="src\core\mesh\VertexBuffer.h" />
     <ClInclude Include="src\core\mesh\VertexLayout.h" />
     <ClInclude Include="src\core\debug\LogSystem.h" />
+    <ClInclude Include="src\core\nodes\Object.h" />
+    <ClInclude Include="src\core\utilities\Random.h" />
     <ClInclude Include="src\core\utilities\WizardTimer.h" />
     <ClInclude Include="src\Core\window\Window.h" />
     <ClInclude Include="src\Core\window\Wizardwin32.h" />
     <ClInclude Include="src\Core\window\WizardWindowsAPI.h" />
     <ClInclude Include="src\core\window\WizardWRL.h" />
+    <ClInclude Include="src\tests\Box.h" />
     <ClInclude Include="src\tests\Test1.h" />
+    <ClInclude Include="src\tests\TestWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\info_face.ico" />

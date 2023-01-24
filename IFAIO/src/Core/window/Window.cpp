@@ -159,6 +159,8 @@ namespace IFAIO
 		return s_WindowClass.m_Instance;
 	}
 
+#ifndef NDEBUG
+
 	Window::Exception::Exception(int line, const char* file, HRESULT hr) noexcept
 		:WizardException::WizardException(line, file), hr(hr)
 	{
@@ -211,5 +213,5 @@ namespace IFAIO
 	{
 		return translateErrorCode(hr);
 	}
-
+#endif
 }

@@ -3,25 +3,33 @@
 
 namespace IFAIO
 {
-
 	void App::setup()
 	{
 		timer.start();
 		onSetup();
-		//auto& gfx = m_RootWindow.getGraphics();
-		//MeshSystem::Create(gfx.getDevice());
+		for (auto& i : objects)
+			i->onSetup();
+		auto& gfx = m_RootWindow.getGraphics();
+
+		MeshSystem::Create(gfx.getDevice());
 	}
 
 	void App::input(EventType e)
 	{
 		onInput(e);
+		for (auto& i : objects)
+			i->onInput(e);
 	}
 
 	void App::render()
 	{
-		onRender(timer.mark());
-		//auto& gfx = m_RootWindow.getGraphics();
-		//MeshSystem::Draw(gfx.getDevice(), gfx.getContext(), gfx.getTarget());
+		auto delta = timer.mark();
+		onRender(delta);
+		auto& gfx = m_RootWindow.getGraphics();
+		for (auto& i : objects)
+			i->onRender(delta);
+		MeshSystem::Draw(gfx);
+
 		return m_RootWindow.getGraphics().EndFrame();
 	}
 
@@ -50,10 +58,14 @@ namespace IFAIO
 
 	}
 
-	int App::run()
+	int App::run() 
 	{
+#ifndef NDEBUG
+
+
 		try
 		{
+#endif 
 			setup();
 			while (!m_shouldQuit)
 			{
@@ -61,8 +73,8 @@ namespace IFAIO
 				pollEvents();
 			}
 			return m_ErrorCode;
+#ifndef NDEBUG
 		}
-
 		catch (const IFAIO::WizardException& e)
 		{
 			LOG(e.what())
@@ -77,7 +89,13 @@ namespace IFAIO
 		{
 			MessageBox(nullptr, L"No details available", L"Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
 		}
-		return -1;
 
+		return -1;
+#endif
+
+	}
+	void App::Bind(Ref<Object> o)
+	{
+		objects.push_back(o);
 	}
 }

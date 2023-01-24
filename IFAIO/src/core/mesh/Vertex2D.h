@@ -12,7 +12,7 @@ namespace IFAIO
 		Vec2 Position;
 		float r, g, b;
 
-		static void setVertexLayout(VertexLayout& vl )
+		static void setVertexLayout(VertexLayout& vl ) noexcept
 		{
 			vl.Push<float>("Position", 2);
 			vl.Push<float>("Colour", 2);

@@ -26,26 +26,36 @@ namespace IFAIO
 			bd.MiscFlags = 0u;
 		}
 
-		void setData(uint32_t num, const unsigned int* indices)
+		void setData(uint32_t num, const unsigned int* indices) noexcept
 		{
 			bd.ByteWidth = sizeof(int) * num;
 			bd.StructureByteStride = sizeof(int);
 			count = num;
-			sd.pSysMem = (const void*)indices;
+			auto temp = new unsigned int[num];
+			memcpy(temp, indices, bd.ByteWidth);
+			sd.pSysMem = (const void*)temp;
 		}
 
 
-		void Create(Microsoft::WRL::ComPtr<ID3D11Device> device)
+		void Create(Microsoft::WRL::ComPtr<ID3D11Device> device) NOEXCEPT
 		{
+			if (!sd.pSysMem)
+			{
+				RAISE("IndexBuffer", "No Data is given");
+			}
 			WIZARD_EXCEPT(device->CreateBuffer(&bd, &sd, &pIndexBuffer));
 		}
 
-		void Bind(Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
+		void Bind(Microsoft::WRL::ComPtr<ID3D11DeviceContext> context) const NOEXCEPT
 		{
+			if (!pIndexBuffer.Get())
+			{
+				RAISE("IndexBuffer", "Not Created");
+			}
 			WIZARD_INFO( context->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT,offset));
 		}
 
-		size_t Count()
+		size_t Count() const NOEXCEPT
 		{
 			return count;
 		}

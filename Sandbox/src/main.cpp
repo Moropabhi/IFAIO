@@ -1,6 +1,7 @@
 ﻿#include "App.h"
 #include "core/Input/InputSystem.h"
 #include "core/dataStructs/Storage.h"
+#include "core/nodes/Box.h"
 
 class WizardsApp :public IFAIO::App
 {
@@ -12,21 +13,15 @@ class WizardsApp :public IFAIO::App
 	{
 		m_RootWindow.setName(L"Click on the white!");
 		auto& gfx = m_RootWindow.getGraphics();
-		
+		Bind(std::make_shared<IFAIO::Box>());
 	}
 
 	void onRender(float delta) override
 	{
 		using namespace IFAIO;
 		auto& gfx=m_RootWindow.getGraphics();
-		m_RootWindow.setName(L"FPS : "+std::to_wstring(1/delta));
+		m_RootWindow.setName(L"rameRate : "+std::to_wstring(delta));
 		gfx.ClearBuffer(r, g, b);
-		mul += delta;
-		auto v = InputSystem::getMousePos(this);
-		v /= {m_RootWindow.getWidth(),m_RootWindow.getHeight()};
-		v *= 2;
-		v -= Vec2::ONE;
-		gfx.DrawTestCube(mul, v.x,-v.y);
 	}
 
 	void onInput(IFAIO::EventType e) override

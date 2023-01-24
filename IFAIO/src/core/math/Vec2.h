@@ -26,32 +26,32 @@ public:
 	{
 	}
 	Vec2(int X, int Y)
-		: x(X), y(Y)
+		: x((float)X), y((float)Y)
 	{
 	}
 
-	float lengthSquared() const
+	float lengthSquared() const noexcept
 	{
 		return x * x + y * y;
 	}
-	float length() const
+	float length() const noexcept
 	{
 		return sqrt(lengthSquared());
 	}
-	Vec2 normalise()
+	Vec2 normalise() const noexcept
 	{
 		return Vec2(x / length(), y / length());
 	}
-	bool is_normalised() const
+	bool is_normalised() const noexcept
 	{
 		return lengthSquared() == 1;
 	}
-	Vec2 abs() const
+	Vec2 abs() const noexcept
 	{
 		return Vec2(std::abs(x), std::abs(y));
 	}
 
-	Vec2 operator+=(Vec2 v)
+	Vec2 operator+=(Vec2 v) noexcept
 	{
 		x += v.x;
 		y += v.y;
@@ -59,57 +59,57 @@ public:
 
 	}
 
-	Vec2 operator-=(Vec2 v)
+	Vec2 operator-=(Vec2 v) noexcept
 	{
 		x -= v.x;
 		y -= v.y;
 		return *this;
 	}
 
-	Vec2 operator*=(Vec2 v)
+	Vec2 operator*=(Vec2 v) noexcept
 	{
 		x *= v.x;
 		y *= v.y;
 		return *this;
 	}
 
-	Vec2 operator/=(Vec2 v)
+	Vec2 operator/=(Vec2 v) noexcept
 	{
 		x /= v.x;
 		y /= v.y;
 		return *this;
 	}
 
-	float& operator[](int i)
+	float& operator[](int i) noexcept
 	{
 
 		return ((float*)this)[i];
 	}
 
-	const float& operator[](int i) const
+	const float& operator[](int i) const noexcept
 	{
 		return ((float*)this)[i];
 	}
 
-	bool operator<(Vec2 v)
+	bool operator<(Vec2 v) noexcept
 
 	{
 		return x < v.x&& y < v.y;
 	}
 
-	bool operator>(Vec2 v)
+	bool operator>(Vec2 v) noexcept
 
 	{
 		return x > v.x && y > v.y;
 	}
 
-	bool operator<=(Vec2 v)
+	bool operator<=(Vec2 v) noexcept
 
 	{
 		return x <= v.x && y <= v.y;
 	}
 
-	bool operator>=(Vec2 v)
+	bool operator>=(Vec2 v) noexcept
 
 	{
 		return x >= v.x && y >= v.y;
@@ -118,7 +118,7 @@ public:
 	float x, y;
 };
 
-inline std::ostream& operator<<(std::ostream& out, const Vec2& v)
+inline std::ostream& operator<<(std::ostream& out, const Vec2& v) noexcept
 {
 	return out << "Vec2 ( " << v[0] << " , " << v[1] << " )";
 }

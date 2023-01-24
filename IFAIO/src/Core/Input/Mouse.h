@@ -55,7 +55,7 @@ namespace IFAIO
 			Vec2 GetPos() const noexcept
 			{
 
-				return{ m_X,m_Y };
+				return{ (float)m_X,(float)m_Y };
 			}
 			inline int GetPosX() const noexcept
 			{

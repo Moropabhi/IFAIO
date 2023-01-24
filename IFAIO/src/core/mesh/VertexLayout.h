@@ -91,31 +91,31 @@ namespace IFAIO
 		}
 
 		template<typename T>
-		void Push(std::string name,unsigned int count, bool normalised = false)
+		void Push(std::string name,unsigned int count, bool normalised = false) noexcept
 		{
 
 		}
 
 		template<>
-		void Push<float>(std::string name, unsigned int count, bool normalised)
+		void Push<float>(std::string name, unsigned int count, bool normalised) noexcept
 		{
 			m_Elements.push_back(VertexBufferElement{ name,VertexBufferElement::FLOAT,count,normalised });
 		}
 		template<>
-		void Push<unsigned int>(std::string name, unsigned int count, bool normalised)
+		void Push<unsigned int>(std::string name, unsigned int count, bool normalised) noexcept
 		{
 			m_Elements.push_back(VertexBufferElement{ name,VertexBufferElement::UINT,count,normalised });
 
 		}
 		template<>
-		void Push<unsigned char>(std::string name, unsigned int count, bool normalised)
+		void Push<unsigned char>(std::string name, unsigned int count, bool normalised) noexcept
 		{
 			m_Elements.push_back(VertexBufferElement{name, VertexBufferElement::BYTE,count,normalised });
 
 		}
-		inline const std::vector<VertexBufferElement>& getElements() { return m_Elements; }
+		inline const std::vector<VertexBufferElement>& getElements() noexcept { return m_Elements; }
 
-		void Create(wrl::ComPtr<ID3D11Device> device, const wrl::ComPtr<ID3DBlob> shaderBlob) const 
+		void Create(wrl::ComPtr<ID3D11Device> device, const wrl::ComPtr<ID3DBlob> shaderBlob) const NOEXCEPT
 		{
 			const auto size = m_Elements.size();
 			D3D11_INPUT_ELEMENT_DESC* ied=(D3D11_INPUT_ELEMENT_DESC*)alloca(sizeof(D3D11_INPUT_ELEMENT_DESC)*size);
@@ -137,7 +137,7 @@ namespace IFAIO
 			));
 		}
 
-		void Bind(Microsoft::WRL::ComPtr<ID3D11DeviceContext> context) const
+		void Bind(Microsoft::WRL::ComPtr<ID3D11DeviceContext> context) const NOEXCEPT
 		{
 			WIZARD_INFO( context->IASetInputLayout(pIL.Get()));
 		}

@@ -20,6 +20,7 @@ namespace IFAIO
 	public:
 
 		VertexBuffer()
+
 		{
 			bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 			bd.Usage = D3D11_USAGE_DEFAULT;
@@ -28,7 +29,7 @@ namespace IFAIO
 		}
 
 		template <typename T>
-		void setData(uint32_t num, const void* vertices)
+		void setData(uint32_t num, const void* vertices) noexcept
 		{
 			bd.ByteWidth = sizeof(T) * num;
 			bd.StructureByteStride = sizeof(T);
@@ -38,14 +39,18 @@ namespace IFAIO
 			sd.pSysMem = (const void*)temp;
 		}
 
-		void Create(Microsoft::WRL::ComPtr<ID3D11Device> device)
+		void Create(Microsoft::WRL::ComPtr<ID3D11Device> device) NOEXCEPT
 		{
 			WIZARD_EXCEPT(device->CreateBuffer(&bd, &sd, &pVertexBuffer));
 		}
 
-		void Bind(Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
+		void Bind(Microsoft::WRL::ComPtr<ID3D11DeviceContext> context) NOEXCEPT
 		{
-			
+			if (!pVertexBuffer.Get())
+			{
+				RAISE("VertexBuffer", "Not Created");
+			}
+			uint32_t offset = 0u;
 			WIZARD_INFO( context->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset));
 		}
 
@@ -54,7 +59,7 @@ namespace IFAIO
 		D3D11_BUFFER_DESC bd;
 		D3D11_SUBRESOURCE_DATA sd;
 		uint32_t stride;
-		uint32_t offset = 0u;
+		
 	};
 
 	

@@ -18,9 +18,12 @@
 #include "core/math/Vec2.h"
 #include "core/math/Rect.h"
 
+#include <DirectXMath.h>
+
 namespace IFAIO
 {
 	namespace wrl = Microsoft::WRL;
+	namespace dx = DirectX;
 
 	typedef  double Decimal;
 

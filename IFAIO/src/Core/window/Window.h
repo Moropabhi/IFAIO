@@ -29,8 +29,8 @@ namespace IFAIO
 		std::optional<int> processMessages(bool& isQueueEmpty, EventType& e);
 
 		Graphics& getGraphics() { return *p_Graphics; }
-		float getWidth() { return m_Width; }
-		float getHeight() { return m_Height; }
+		int getWidth() { return m_Width; }
+		int getHeight() { return m_Height; }
 	public:
 		Keyboard m_Keyboard;
 		Mouse m_Mouse;
@@ -66,6 +66,7 @@ namespace IFAIO
 		static WindowClass s_WindowClass;
 		HINSTANCE m_Instance;
 	};
+#ifndef NDEBUG
 	class Window::Exception : public WizardException
 	{
 	public:
@@ -78,9 +79,13 @@ namespace IFAIO
 	private:
 		HRESULT hr;
 	};
+#endif
 
 }
-
+#ifndef NDEBUG
 #define WND_EXCEPT( hr ) Window::Exception( __LINE__,__FILE__,hr )
 #define WND_LAST_EXCEPT() Window::Exception( __LINE__,__FILE__,GetLastError() )
-
+#else
+#define WND_EXCEPT( hr ) hr
+#define WND_LAST_EXCEPT()  
+#endif
